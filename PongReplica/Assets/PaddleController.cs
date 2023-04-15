@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class PaddleController : MonoBehaviour
 {
-    [SerializeField]
-    float speed = 10f;
-    private Rigidbody2D rb;
+    public float speed = 10f;
 
-    private void Start()
+    private Rigidbody2D rb2d;
+
+    void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        float verticalInput = Input.GetAxis("Vertical");
-        rb.velocity = new Vector2(0, verticalInput * speed);
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb2d.velocity = new Vector2(0f, speed);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            rb2d.velocity = new Vector2(0f, -speed);
+        }
+        else
+        {
+            rb2d.velocity = Vector2.zero;
+        }
+
     }
 }
